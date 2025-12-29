@@ -72,7 +72,7 @@ flowchart LR
 ```
 ## 🛠 Tech Stack
 
-# Backend
+### Backend
 Node.js
 Express.js
 MongoDB Atlas
@@ -80,19 +80,18 @@ Mongoose
 Axios
 Cheerio
 
-# Automation & AI
+### Automation & AI
 Serper.dev (Google Search API)
 Google Gemini (gemini-2.5-flash)
 Prompt Engineering for LLMs
 
-# Tooling
+### Tooling
 Postman (API testing)
 Nodemon
 Git & GitHub
 
-📂 Project Structure
-text
-Copy code
+## 📂 Project Structure
+
 src/
 ├── app.js                 # Express app (ES Modules)
 ├── models/
@@ -111,7 +110,9 @@ src/
 │   ├── updateArticle.js
 │   └── runAutomation.js
 └── .env (ignored)
-🧩 Phase-wise Implementation
+
+
+## 🧩 Phase-wise Implementation
 🔹 Phase 1 – Data Collection
 Scraped 5 oldest blog articles
 
