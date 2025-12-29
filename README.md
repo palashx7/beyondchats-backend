@@ -66,47 +66,21 @@ The system is designed to be fault-tolerant, modular, and scalable.
 ✅ Clean Git history with logical commits
 
 
-🧠 System Architecture
-┌──────────────┐
-│ BeyondChats  │
-│   Blog Site  │
-└──────┬───────┘
-       │ Scraping (Phase 1)
-       ▼
-┌──────────────┐
-│ MongoDB      │
-│  Articles    │
-└──────┬───────┘
-       │ REST APIs
-       ▼
-┌──────────────┐
-│ Express API  │
-│ CRUD Routes  │
-└──────┬───────┘
-       │ Automation (Phase 2)
-       ▼
-┌──────────────┐
-│ Google       │
-│ Search API   │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Competitor   │
-│ Blog Pages   │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Gemini LLM   │
-│ (Rewrite)   │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Update via   │
-│ PUT API      │
-└──────────────┘
+```md
+## 🧠 System Architecture
+
+```mermaid
+flowchart LR
+    A[BeyondChats Blog Site] --> B[Scraping Phase 1]
+    B --> C[MongoDB Articles]
+    C --> D[Express REST APIs]
+    D --> E[CRUD Routes]
+
+    C --> F[Automation Phase 2]
+    F --> G[Google Search API]
+    G --> H[Competitor Blog Pages]
+    H --> I[Gemini LLM Rewrite]
+    I --> J[Update Article via PUT API]
 
 
 🛠 Tech Stack
