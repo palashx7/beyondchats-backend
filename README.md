@@ -70,32 +70,24 @@ flowchart LR
     H --> I[Gemini LLM Rewrite]
     I --> J[Update Article via PUT API]
 ```
-🛠 Tech Stack
-Backend
+## 🛠 Tech Stack
+
+# Backend
 Node.js
-
 Express.js
-
 MongoDB Atlas
-
 Mongoose
-
 Axios
-
 Cheerio
 
-Automation & AI
+# Automation & AI
 Serper.dev (Google Search API)
-
 Google Gemini (gemini-2.5-flash)
-
 Prompt Engineering for LLMs
 
-Tooling
+# Tooling
 Postman (API testing)
-
 Nodemon
-
 Git & GitHub
 
 📂 Project Structure
