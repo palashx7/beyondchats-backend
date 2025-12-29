@@ -9,48 +9,61 @@ import { updateArticle } from './updateArticle.js';
 async function runAutomation() {
   const articles = await fetchArticles();
 
-  // 🔒 SAFETY: only process first non-updated article
-  const article = articles.find(a => !a.isUpdated);
+  const pendingArticles = articles.filter(a => !a.isUpdated);
 
-  if (!article) {
+  if (pendingArticles.length === 0) {
     console.log('No articles left to update.');
     return;
   }
 
-  console.log(`\nProcessing article: ${article.title}\n`);
+  console.log(`Found ${pendingArticles.length} articles to update.\n`);
 
-  // 1️⃣ Google search
-  const competitorLinks = await searchGoogle(article.title);
-  console.log('Competitor links:', competitorLinks);
+  for (const article of pendingArticles) {
+    try {
+      console.log(`Processing article: ${article.title}\n`);
 
-  // 2️⃣ Scrape competitor content
-  const competitorContents = [];
-  for (const link of competitorLinks) {
-    const text = await scrapeExternalArticle(link);
-    if (text) competitorContents.push(text);
+      // 1️⃣ Google search
+      const competitorLinks = await searchGoogle(article.title);
+      console.log('Competitor links:', competitorLinks);
+
+      // 2️⃣ Scrape competitor content
+      const competitorContents = [];
+      for (const link of competitorLinks) {
+        const text = await scrapeExternalArticle(link);
+        if (text) competitorContents.push(text);
+      }
+
+      if (competitorContents.length === 0) {
+        console.log('⚠️ No competitor content available, skipping.\n');
+        continue;
+      }
+
+      // 3️⃣ Rewrite using Gemini
+      const updatedContent = await rewriteWithGemini(
+        article.content,
+        competitorContents
+      );
+
+      if (!updatedContent) {
+        console.log('⚠️ LLM failed, skipping.\n');
+        continue;
+      }
+
+      // 4️⃣ Update article via API
+      await updateArticle(
+        article._id,
+        updatedContent,
+        competitorLinks
+      );
+
+      console.log(`✅ Updated: ${article.title}\n`);
+    } catch (error) {
+      console.error(`❌ Failed for ${article.title}:`, error.message);
+    }
   }
 
-  // 3️⃣ Rewrite using Gemini
-  const updatedContent = await rewriteWithGemini(
-    article.content,
-    competitorContents
-  );
-
-  if (!updatedContent) {
-    console.log('LLM failed to generate content.');
-    return;
-  }
-
-  // 4️⃣ Update article via API
-  const updatedArticle = await updateArticle(
-    article._id,
-    updatedContent,
-    competitorLinks
-  );
-
-  if (updatedArticle) {
-    console.log('✅ Article updated successfully:', updatedArticle.title);
-  }
+  console.log('🎉 Automation completed for all pending articles.');
 }
+
 
 runAutomation();
