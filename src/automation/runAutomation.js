@@ -1,19 +1,56 @@
-import { fetchArticles } from "./fetchArticles.mjs";
-import { cleanContent } from "./cleanContent.mjs";
+import 'dotenv/config';
 
-async function run() {
-  console.log("🚀 Automation started");
+import fetchArticles from './fetchArticles.js';
+import { searchGoogle } from './searchGoogle.js';
+import { scrapeExternalArticle } from './scrapeExternal.js';
+import { rewriteWithGemini } from './llmRewrite.js';
+import { updateArticle } from './updateArticle.js';
 
+async function runAutomation() {
   const articles = await fetchArticles();
 
-  articles.forEach((article, index) => {
-    const cleanedContent = cleanContent(article.content);
+  // 🔒 SAFETY: only process first non-updated article
+  const article = articles.find(a => !a.isUpdated);
 
-    console.log(`\n📝 Article ${index + 1}`);
-    console.log("Title:", article.title);
-    console.log("Original length:", article.content.length);
-    console.log("Cleaned length:", cleanedContent.length);
-  });
+  if (!article) {
+    console.log('No articles left to update.');
+    return;
+  }
+
+  console.log(`\nProcessing article: ${article.title}\n`);
+
+  // 1️⃣ Google search
+  const competitorLinks = await searchGoogle(article.title);
+  console.log('Competitor links:', competitorLinks);
+
+  // 2️⃣ Scrape competitor content
+  const competitorContents = [];
+  for (const link of competitorLinks) {
+    const text = await scrapeExternalArticle(link);
+    if (text) competitorContents.push(text);
+  }
+
+  // 3️⃣ Rewrite using Gemini
+  const updatedContent = await rewriteWithGemini(
+    article.content,
+    competitorContents
+  );
+
+  if (!updatedContent) {
+    console.log('LLM failed to generate content.');
+    return;
+  }
+
+  // 4️⃣ Update article via API
+  const updatedArticle = await updateArticle(
+    article._id,
+    updatedContent,
+    competitorLinks
+  );
+
+  if (updatedArticle) {
+    console.log('✅ Article updated successfully:', updatedArticle.title);
+  }
 }
 
-run();
+runAutomation();

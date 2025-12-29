@@ -1,8 +1,8 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:5000/api/articles';
 
-async function fetchArticles() {
+export default async function fetchArticles() {
   try {
     const response = await axios.get(API_BASE_URL);
     return response.data;
@@ -11,5 +11,3 @@ async function fetchArticles() {
     return [];
   }
 }
-
-module.exports = fetchArticles;

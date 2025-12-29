@@ -1,7 +1,7 @@
-const Article = require('../models/Article');
+import Article from '../models/Article.js';
 
 // GET all articles
-exports.getAllArticles = async (req, res) => {
+export const getAllArticles = async (req, res) => {
   try {
     const articles = await Article.find().sort({ createdAt: 1 });
     res.status(200).json(articles);
@@ -11,7 +11,7 @@ exports.getAllArticles = async (req, res) => {
 };
 
 // GET article by ID
-exports.getArticleById = async (req, res) => {
+export const getArticleById = async (req, res) => {
   try {
     const article = await Article.findById(req.params.id);
     if (!article) {
@@ -24,7 +24,7 @@ exports.getArticleById = async (req, res) => {
 };
 
 // CREATE new article
-exports.createArticle = async (req, res) => {
+export const createArticle = async (req, res) => {
   try {
     const article = await Article.create(req.body);
     res.status(201).json(article);
@@ -34,7 +34,7 @@ exports.createArticle = async (req, res) => {
 };
 
 // UPDATE article
-exports.updateArticle = async (req, res) => {
+export const updateArticle = async (req, res) => {
   try {
     const article = await Article.findByIdAndUpdate(
       req.params.id,
@@ -51,7 +51,7 @@ exports.updateArticle = async (req, res) => {
 };
 
 // DELETE article
-exports.deleteArticle = async (req, res) => {
+export const deleteArticle = async (req, res) => {
   try {
     const article = await Article.findByIdAndDelete(req.params.id);
     if (!article) {

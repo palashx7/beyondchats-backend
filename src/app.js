@@ -1,9 +1,9 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import 'dotenv/config';
 
-const articleRoutes = require('./routes/articleRoutes');
+import articleRoutes from './routes/articleRoutes.js';
 
 const app = express();
 
@@ -14,14 +14,14 @@ app.use(express.json());
 // Routes
 app.use('/api/articles', articleRoutes);
 
-// Health check route
+// Health check
 app.get('/', (req, res) => {
   res.send('BeyondChats Backend is running 🚀');
 });
 
 const PORT = process.env.PORT || 5000;
 
-// DB connection + server start
+// DB + Server
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
