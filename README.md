@@ -91,7 +91,7 @@ Nodemon
 Git & GitHub
 
 ## 📂 Project Structure
-
+```text
 src/
 ├── app.js                 # Express app (ES Modules)
 ├── models/
@@ -110,7 +110,7 @@ src/
 │   ├── updateArticle.js
 │   └── runAutomation.js
 └── .env (ignored)
-
+```
 
 ## 🧩 Phase-wise Implementation
 🔹 Phase 1 – Data Collection
@@ -138,40 +138,43 @@ Update articles via PUT API
 
 Store reference URLs
 
-⚙️ Setup & Installation
+## ⚙️ Setup & Installation
 1️⃣ Clone Repository
-bash
-Copy code
+```bash
 git clone <repo-url>
 cd beyondchats-backend
+```
 2️⃣ Install Dependencies
-bash
-Copy code
+```bash
 npm install
+```
 3️⃣ Environment Variables (.env)
-bash
-Copy code
+```bash
 PORT=5000
 MONGO_URI=your_mongodb_uri
 SERPER_API_KEY=your_serper_key
 GEMINI_API_KEY=your_gemini_key
+```
 4️⃣ Run Backend
-bash
-Copy code
+```bash
 npm run dev
+```
 5️⃣ Run Automation
-bash
-Copy code
+```bash
 node src/automation/runAutomation.js
-🔌 API Endpoints
-Method	Endpoint	Description
-GET	/api/articles	Get all articles
-GET	/api/articles/:id	Get article by ID
-POST	/api/articles	Create article
-PUT	/api/articles/:id	Update article
-DELETE	/api/articles/:id	Delete article
+```
 
-🔁 Automation Workflow (Phase 2)
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | /api/articles | Fetch all articles |
+| GET | /api/articles/:id | Fetch article by ID |
+| POST | /api/articles | Create article |
+| PUT | /api/articles/:id | Update article |
+| DELETE | /api/articles/:id | Delete article |
+
+## 🔁 Automation Workflow (Phase 2)
 For each non-updated article:
 
 Fetch article via API
@@ -188,7 +191,7 @@ Save reference URLs
 
 The pipeline is resilient — failures in scraping do not crash the system.
 
-⚠️ Error Handling & Design Decisions
+## ⚠️ Error Handling & Design Decisions
 External scraping failures are gracefully skipped
 
 LLM output is validated before DB update
@@ -199,7 +202,7 @@ ES Modules used for consistency across backend & automation
 
 LLM layer is model-agnostic (Gemini/OpenAI)
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 Frontend dashboard (React)
 
 Scheduled automation (cron jobs)
@@ -210,7 +213,7 @@ Versioning of articles
 
 Authentication & role-based access
 
-👤 Author
+##👤 Author
 Palash Bhivgade
 Final Year Electronics & Telecommunication Engineering Student
 Aspiring Backend / Full Stack Developer
