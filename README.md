@@ -213,7 +213,7 @@ Versioning of articles
 
 Authentication & role-based access
 
-##👤 Author
+## 👤 Author
 Palash Bhivgade
 Final Year Electronics & Telecommunication Engineering Student
 Aspiring Backend / Full Stack Developer
