@@ -214,12 +214,13 @@ Versioning of articles
 Authentication & role-based access
 
 ## 👤 Author
-Palash Bhivgade
-Final Year Electronics & Telecommunication Engineering Student
-Aspiring Backend / Full Stack Developer
 
-📧 Email: pdbhivgade77@gmail.com
-🔗 GitHub: https://github.com/palashx7
+**Palash Bhivgade**  
+Final Year Electronics & Telecommunication Engineering Student  
+Aspiring Backend / Full Stack Developer  
+
+📧 Email: pdbhivgade77@gmail.com  
+🔗 GitHub: https://github.com/palashx7  
 🔗 LinkedIn: https://www.linkedin.com/in/palash-bhivgade-54089a191
 
 ⭐ Final Note
