@@ -4,12 +4,23 @@ import fetchArticles from './fetchArticles.js';
 import { searchGoogle } from './searchGoogle.js';
 import { scrapeExternalArticle } from './scrapeExternal.js';
 import { rewriteWithGemini } from './llmRewrite.js';
-import { updateArticle } from './updateArticle.js';
+import { createUpdatedArticle } from './createUpdatedArticle.js';
+
 
 async function runAutomation() {
   const articles = await fetchArticles();
 
-  const pendingArticles = articles.filter(a => !a.isUpdated);
+  const pendingArticles = articles.filter(a => {
+  const hasUpdatedVersion = articles.some(
+    x =>
+      x.parentArticleId &&
+      x.parentArticleId.toString() === a._id.toString()
+  );
+
+  return !a.isUpdated && !hasUpdatedVersion;
+});
+
+
 
   if (pendingArticles.length === 0) {
     console.log('No articles left to update.');
@@ -50,13 +61,16 @@ async function runAutomation() {
       }
 
       // 4️⃣ Update article via API
-      await updateArticle(
-        article._id,
-        updatedContent,
-        competitorLinks
-      );
+      await createUpdatedArticle(
+      article,
+      updatedContent,
+      competitorLinks
+    );
 
-      console.log(`✅ Updated: ${article.title}\n`);
+    console.log(`✅ Created updated version for: ${article.title}`);
+
+
+      
     } catch (error) {
       console.error(`❌ Failed for ${article.title}:`, error.message);
     }

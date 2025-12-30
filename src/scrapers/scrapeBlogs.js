@@ -1,9 +1,13 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-const mongoose = require('mongoose');
-require('dotenv').config();
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const Article = require('../models/Article');
+dotenv.config();
+
+
+import Article from '../models/Article.js';
+
 
 const BASE_URL = 'https://beyondchats.com/blogs/page/';
 
@@ -93,4 +97,15 @@ async function scrapeAndSaveOldestArticles() {
   console.log('Scraping completed & DB connection closed');
 }
 
-module.exports = { scrapeAndSaveOldestArticles };
+export { scrapeAndSaveOldestArticles };
+
+// Run scraper when file is executed directly
+scrapeAndSaveOldestArticles()
+  .then(() => {
+    console.log('✅ Scraping completed');
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error('❌ Scraping failed:', err);
+    process.exit(1);
+  });

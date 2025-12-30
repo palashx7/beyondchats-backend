@@ -6,6 +6,7 @@ const ArticleSchema = new mongoose.Schema(
     content: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     isUpdated: { type: Boolean, default: false },
+    parentArticleId: {type: mongoose.Schema.Types.ObjectId, ref: 'Article', default: null},
     references: { type: [String], default: [] }
   },
   { timestamps: true }
