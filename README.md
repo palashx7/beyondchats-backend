@@ -73,22 +73,22 @@ flowchart LR
 ## 🛠 Tech Stack
 
 ### Backend
-Node.js
-Express.js
-MongoDB Atlas
-Mongoose
-Axios
-Cheerio
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- Axios
+- Cheerio
 
 ### Automation & AI
-Serper.dev (Google Search API)
-Google Gemini (gemini-2.5-flash)
-Prompt Engineering for LLMs
+- Serper.dev (Google Search API)
+- Google Gemini (gemini-2.5-flash)
+- Prompt Engineering for LLMs
 
 ### Tooling
-Postman (API testing)
-Nodemon
-Git & GitHub
+- Postman (API testing)
+- Nodemon
+-   Git & GitHub
 
 ## 📂 Project Structure
 ```text
@@ -114,29 +114,21 @@ src/
 
 ## 🧩 Phase-wise Implementation
 🔹 Phase 1 – Data Collection
-Scraped 5 oldest blog articles
-
-Used backward pagination for correct chronology
-
-Stored articles in MongoDB
+- Scraped 5 oldest blog articles
+- Used backward pagination for correct chronology
+- Stored articles in MongoDB
 
 🔹 Phase 1.5 – Backend APIs
-Implemented full CRUD APIs
-
-Tested all endpoints using Postman
+- Implemented full CRUD APIs
+- Tested all endpoints using Postman
 
 🔹 Phase 2 – Automation & AI
-Fetch articles via API
-
-Search competitors using Google Search API
-
-Scrape competitor content
-
-Rewrite articles using Gemini LLM
-
-Update articles via PUT API
-
-Store reference URLs
+- Fetch articles via API
+- Search competitors using Google Search API
+- Scrape competitor content
+- Rewrite articles using Gemini LLM
+- Update articles via PUT API
+- Store reference URLs
 
 ## ⚙️ Setup & Installation
 1️⃣ Clone Repository
@@ -175,43 +167,28 @@ node src/automation/runAutomation.js
 | DELETE | /api/articles/:id | Delete article |
 
 ## 🔁 Automation Workflow (Phase 2)
-For each non-updated article:
-
-Fetch article via API
-
-Search title on Google
-
-Scrape 2 competitor blogs
-
-Rewrite content using Gemini
-
-Update article via PUT API
-
-Save reference URLs
-
-The pipeline is resilient — failures in scraping do not crash the system.
+- For each non-updated article:
+- Fetch article via API
+- Search title on Google
+- Scrape 2 competitor blogs
+- Rewrite content using Gemini
+- Update article via PUT API
+- Save reference URLs
+- The pipeline is resilient — failures in scraping do not crash the system.
 
 ## ⚠️ Error Handling & Design Decisions
-External scraping failures are gracefully skipped
-
-LLM output is validated before DB update
-
-Automation runs sequentially to avoid rate limits
-
-ES Modules used for consistency across backend & automation
-
-LLM layer is model-agnostic (Gemini/OpenAI)
+- External scraping failures are gracefully skipped
+- LLM output is validated before DB update
+- Automation runs sequentially to avoid rate limits
+- ES Modules used for consistency across backend & automation
+- LLM layer is model-agnostic (Gemini/OpenAI)
 
 ## 🚀 Future Improvements
-Frontend dashboard (React)
-
-Scheduled automation (cron jobs)
-
-SEO score comparison
-
-Versioning of articles
-
-Authentication & role-based access
+- Frontend dashboard (React)
+- Scheduled automation (cron jobs)
+- SEO score comparison
+- Versioning of articles
+- Authentication & role-based access
 
 ## 👤 Author
 
