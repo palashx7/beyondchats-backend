@@ -81,14 +81,14 @@ flowchart LR
 - Cheerio
 
 ### Automation & AI
-- Serper.dev (Google Search API)
-- Google Gemini (gemini-2.5-flash)
-- Prompt Engineering for LLMs
+- Google Search API (Serper.dev)
+- Google Gemini LLM (gemini-2.5-flash)
+- Prompt Engineering
 
 ### Tooling
-- Postman (API testing)
+- Git & GitHub
+- Postman
 - Nodemon
--   Git & GitHub
 
 ## 📂 Project Structure
 ```text
